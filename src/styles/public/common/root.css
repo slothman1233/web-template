@@ -1,0 +1,23 @@
+:root {
+  --defind-width: 1170px;
+  --defind-left-width: 850px;
+  --defind-right-widht: 300px;
+  --font-f: '微软雅黑',
+        '宋体,PingFang SC,Lantinghei SC,Helvetica Neue';
+  --defind-size: 16px;
+  --border-color: #ddd;
+  --font-color_1: #323232;
+  --font-color_2: #636363;
+  --font-color_3: #929292;
+  --emphasize-red: #ff1a30;
+  --auxiliary-k: #feaf48;
+  --offer-b: #14b971;
+  --line: #eaeaea;
+  --default-bg: #f7f7f7;
+  --mainColor-1: #005269;
+  --mainColor-2: #feaf48;
+  --mainColor-3: #14b971;
+  --mainColor-4: #323232;
+  --mainColor-5: #00b5e9;
+  --mainColor-6: #ff1a30;
+}
