@@ -1,45 +1,109 @@
 <template>
   <div>
-    <HelloWorld :msg="msg"></HelloWorld>
-
-    <!-- <a-button>Add</a-button> -->
-
-    <a-affix>a-affix</a-affix>
-
-    <a-alert>a-alert</a-alert>
-
-    <VanButton type="primary">asdfasd</VanButton>
-
-    <ElFooter></ElFooter>
-
-    <a-message>12312</a-message>
-    <a-notification>asdfas</a-notification>
+    <!-- <HelloWorld :msg="msg"></HelloWorld> -->
+    sdfgdsfg
   </div>
 
-  <div>
-    <SvgIcon icon-class="a-bug"></SvgIcon>
-    <SvgIcon icon-class="projectManage"></SvgIcon>
-  </div>
+  <UploadFile
+    v-model:fileList="fileList"
+    :listType="'picture-card'"
+    :multiple="true"
+    :limit="11"
+    :accept="'image/gif, image/jpeg'"
+    :handleExceed="handleExceed"
+    :changeList="changelist"
+  >
+    <template #tip>
+      <div class="el-upload__tip"> jpg/png files with a size less than 500kb </div>
+    </template>
+
+    <!-- <template #file="{ file }">
+      <div>
+        <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
+        <span class="el-upload-list__item-actions">
+          <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
+            <el-icon><zoom-in /></el-icon>
+          </span>
+          <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleDownload(file)">
+            <el-icon><download /></el-icon>
+          </span>
+          <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)">
+            <el-icon><delete /></el-icon>
+          </span>
+        </span>
+      </div>
+    </template> -->
+
+    <!-- <template #dialog>
+      <el-dialog v-model="dialogVisible" :lock-scroll="true" :center="true">
+        <img :src="dialogImageUrl" alt="" style="display: block; margin: auto" />
+      </el-dialog>
+    </template> -->
+  </UploadFile>
 </template>
 
 <script lang="ts">
-  import HelloWorld from 'comps/HelloWorld.vue';
-  import { propType } from './model';
-
-  const scope = effectScope();
-
-  const sr = scope.run(() => {
-    const double = computed(() => 2);
-
-    return { double };
-  });
-
+  // import HelloWorld from 'comps/HelloWorld.vue';
+  import { ElMessage } from 'element-plus';
+  import { defineComponent, getCurrentInstance, reactive, toRefs } from 'vue';
   export default defineComponent({
     name: 'ViewsHome',
-    components: { HelloWorld },
-    setup(props: propType, ctx) {
+    props: {
+      num: {
+        // type: String,
+        // default: '默认msgs',
+        // require: true,
+      },
+    },
+    setup(prop, ctx) {
+      let fileList = [
+        {
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+        },
+        {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+        },
+      ];
+
+      const staticData = reactive({
+        dialogImageUrl: '',
+        dialogVisible: false,
+        disabled: false,
+        fileList,
+      });
+      const refData = toRefs(staticData);
+
+      //图片调整后触发
+      const changelist = (arg: any[]) => {
+        staticData.fileList = arg;
+        console.log(staticData.fileList);
+      };
+
+      const handleRemove = (file: any) => {
+        console.log(file);
+      };
+      const handlePictureCardPreview = (file: any) => {
+        staticData.dialogImageUrl = file.url;
+        staticData.dialogVisible = true;
+      };
+      const handleDownload = (file: any) => {
+        console.log(file);
+      };
+
+      const handleExceed = (files: any[], fileList: any) => {
+        console.log(files);
+        ElMessage('超过最大上传数量');
+      };
+
       return {
-        msg: 'hel2lo World',
+        ...refData,
+        handleRemove,
+        handlePictureCardPreview,
+        handleDownload,
+        handleExceed,
+        changelist,
       };
     },
   });
@@ -47,6 +111,7 @@
 
 <style lang="less">
   body {
+    color: @FontColor_1;
     display: flex;
   }
 </style>

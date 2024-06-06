@@ -1,23 +1,53 @@
 <template>
   <div class="home-layout">
+    <SildeBar :collapse="isCollapse" :routes="routes" />
     <div class="con-box">
-      <Header />
-
-      <router-view class="app-con"></router-view>
+      <HeaderNav />
+      <Breadcrumb :collapse="isCollapse" @toggleSideBar="toggleSideBar" />
+      <keep-alive>
+        <router-view class="app-con"></router-view>
+      </keep-alive>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import Header from '@/layout/component/header.vue';
+  import { getUserInfoCache } from '@/common/utils/permission';
+  import { reactive, toRefs, defineComponent } from 'vue';
+  import checkMenuList, { Menu } from '@/common/utils/permission/checkMenuList';
+  import { statroutes, routes as defaultRoutes } from '@/router';
+  import HeaderNav from './component/HeaderNav/index.vue';
 
-  export default {
+  export default defineComponent({
     name: 'DefaultLayout',
-    components: { Header },
-    setup() {
-      return {};
+    components: { HeaderNav },
+    setup(prop, ctx) {
+      const staticData = reactive({
+        isCollapse: false,
+        routes: [],
+      });
+
+      const refData = toRefs(staticData);
+
+      const getUserInfo = JSON.parse(getUserInfoCache() || '');
+
+      const menuList: Menu[] = getUserInfo.menuList;
+
+      refData.routes.value = [
+        ...(defaultRoutes || []),
+        ...checkMenuList(menuList, statroutes),
+      ] as never[];
+
+      const toggleSideBar = () => {
+        refData.isCollapse.value = !refData.isCollapse.value;
+      };
+
+      return {
+        ...refData,
+        toggleSideBar,
+      };
     },
-  };
+  });
 </script>
 
 <style scoped lang="less">

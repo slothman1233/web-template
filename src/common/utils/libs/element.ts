@@ -1,5 +1,5 @@
 // 按需加载element
-import { App } from 'vue';
+import type { App } from 'vue';
 
 // import {
 //   ElAlert,
@@ -207,8 +207,6 @@ export function setupElementPlus(app: App<Element>): void {
 
   // 统一注册el-icon图标
   for (const iconName in ElIconModules) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     app.component(ElIconModules[iconName].name, ElIconModules[iconName].render());
   }
 

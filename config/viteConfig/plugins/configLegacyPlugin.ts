@@ -3,7 +3,7 @@
  */
 
 import legacy from '@vitejs/plugin-legacy';
-import { Plugin } from 'vite';
+import type { Plugin } from 'vite';
 
 export default (): Plugin | null => {
   return legacy({

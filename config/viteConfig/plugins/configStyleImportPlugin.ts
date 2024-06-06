@@ -1,7 +1,7 @@
 /**
  *  element vant  组件注入处理
  */
-import { Plugin } from 'vite';
+import type { Plugin } from 'vite';
 import styleImport from 'vite-plugin-style-import';
 
 export function configStyleImportPlugin(isBuild?: boolean): Plugin {

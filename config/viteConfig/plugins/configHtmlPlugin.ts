@@ -1,7 +1,7 @@
 /**
  * 针对 index.html，提供压缩和基于 ejs 模板功能
  */
-import { Plugin } from 'vite';
+import type { Plugin } from 'vite';
 
 import html from 'vite-plugin-html';
 

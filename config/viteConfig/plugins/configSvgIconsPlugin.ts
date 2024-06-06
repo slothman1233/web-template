@@ -1,7 +1,7 @@
 /**
  *  svg 处理
  */
-import { Plugin } from 'vite';
+import type { Plugin } from 'vite';
 import SvgIconsPlugin from 'vite-plugin-svg-icons';
 import path from 'path';
 

@@ -1,14 +1,13 @@
 /**
  * Mock处理
  */
-import { Plugin } from 'vite';
+import type { Plugin } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
 import env from '../../../src/common/config/mock';
 
-// eslint-disable-next-line no-global-assign, @typescript-eslint/ban-ts-comment
-// @ts-ignore
-// window = {};
-// window.configModel = env;
+// eslint-disable-next-line no-global-assign
+window = {};
+window.configModel = env;
 export default function configMockPlugin(
   useMock = true,
   isBuild: boolean,

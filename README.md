@@ -1,58 +1,54 @@
-# 基于 vite+vue3+mock 的 web 端框架
-
-安装 npm 依赖 必须使用 npm install --force 安装
+# 基于 vite+vue3+mock的web端框架
 
 运行要求
-
 ```bash
 node版本 v16.13.0
 npm版本 8.0.0以上
 ```
 
-命令介绍
 
+命令介绍
 ```bash
 npm run dev     -----  运行dev环境
 npm run test  -----  运行test 环境
 npm run pre -----  运行pre 环境
-npm run ga  -----  运行ga 环境
+npm run prod  -----  运行prod 环境
 npm run mock  -----  运行mock数据的环境
 npm run build ----- 打包生产代码
 npm run build:mock ----- 打包生产代码带mock的
 npm run serve ----- 运行生产代码
 ```
 
-dock 命令
-
-```bash
-docker build -t vite . --build-arg env=pre --tag op:1
-
-docker run -d -p :5000:5050  op:1
-```
-
 开发方式
-
 ```bash
-1.在views里面创建vue的页面
+1.在views里面创建vue的文件
 2.在routes里面创建对应的路由
 ```
 
-创建页面说明（示例在 view 里面的 qs）
+docker命令
+```bash
 
+docker build -t vite . --build-arg env=pre --tag op:1
+
+docker run -d -p :5000:5050  op:1 
+
+```
+
+创建页面说明（示例在view里面的qs）
 ```bash
 
 页面文件夹
 │   ├── index 页面
 │   ├── model 当前页面的模型文件
 │   ├── components 针对当前页面的 控件文件夹
-│   │   └──  cpmDemo 控件 文件名
+│   │   └──  cpmDemo 控件 文件名 
 │   │   │   ├── index 控件页面
 │   │   │   └── model 当前控件的模型文件
 
 ```
 
-目录说明
 
+目录说明
 ```
 ├── config  vite的配置文件
 │   ├── env  vite运行下的配置文件夹
@@ -77,20 +73,19 @@ docker run -d -p :5000:5050  op:1
 ├── src
 │   ├── common 公共部分
 │   │   ├── config 针对客户端的环境配置文件夹
-│   │   ├── hook 
-│   │   │   └── useDebouncedRef.ts 自定义ref的防抖处理
 │   │   ├── utils 通用文件夹
-│   │   │   ├── libs 插件的文件夹(默认注入了element、vant和antd)
-│   │   │   ├── eventbus.ts 事件总线(mitt 全局的观察者)
-│   │   │   └── index.ts
+│   │   │   ├── libs 插件的文件夹(默认注入了element和vant)
+│   │   │   └── index.less 全局注入的样式
 │   ├── components 组件文件夹 (文件夹名为组件名---只有文件夹下的index.ts的default为对应的组件方法)
-│   │   ├── SvgIcon    svg组件
-│   │   ├── HelloWorlds    组件示例
-│   │   │   └── index.ts   组件实现
-│   │   └── HelloWorld.vue     可以删除
+│   │   │   SvgIcon    svg组件 
+│   │   └── index.ts    组件全局注入 
 │   ├── layout 布局文件夹
 │   │   ├── components 布局的组件文件夹
-│   │   └── index.ts 布局页示例
+│   │   │   ├── Breadcrumb 面包屑组件
+│   │   │   ├── HeaderNav 顶部导航栏和顶部右侧登录信息组件
+│   │   │   ├── SildeBar 左侧列表组件
+│   │   │   └── Tabs 顶部tab切换组件
+│   │   └── index.ts 布局页
 │   ├── router 路由
 │   ├── services api请求文件夹
 │   │   ├── http axios求请求插件
@@ -107,7 +102,6 @@ docker run -d -p :5000:5050  op:1
 │   │   │   └── index.less 全局注入的样式(默认注入了element和vant)
 │   │   ├── public 全局样式
 │   │   │   ├── common 样式变量
-│   │   │   │   ├── root.less 样式规范
 │   │   │   │   └── index.less 全局函数式样式（默认注入）
 │   │   │   └── index.less 全局默认样式（默认注入）
 │   ├── views vue页面
@@ -115,11 +109,12 @@ docker run -d -p :5000:5050  op:1
 │   │   │   ├── index 页面
 │   │   │   ├── model 当前页面的模型文件
 │   │   │   ├── components 针对当前页面的 控件文件夹
-│   │   │   │   └──  cpmDemo 控件 文件名
+│   │   │   │   └──  cpmDemo 控件 文件名 
 │   │   │   │   │   ├── index 控件页面
 │   │   │   │   │   └── model 当前控件的模型文件
+│   │   └── login  登录页
 │   ├── App.ts
-│   ├── main.ts
+│   ├── main.ts 
 │   ├── types  ts全局声明
 │   │   ├── env.d.ts  env 全局配置声明文件
 │   │   ├── index.d.ts  全局声明
@@ -133,9 +128,8 @@ docker run -d -p :5000:5050  op:1
 ```
 
 备注
-
 ```
-eslint
+eslint 
 
 #安装eslint
 npm install --save-dev eslint eslint-plugin-vue
@@ -146,7 +140,7 @@ npm install --save-dev prettier eslint-plugin-prettier @vue/eslint-config-pretti
 #安装typescript支持
 npm install --save-dev @vue/eslint-config-typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser
 
-vscode 首选项 -> 设置里面添加
+vscode 首选项 -> 设置里面添加 
 "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "eslint.autoFixOnSave" : true,

@@ -1,6 +1,6 @@
 import eslintPlugin from 'vite-plugin-eslint'; // 引入vite-plugin-vue
 
-import { Plugin } from 'vite';
+import type { Plugin } from 'vite';
 
 export default (): Plugin | null => {
   return eslintPlugin({

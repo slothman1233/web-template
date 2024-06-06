@@ -2,7 +2,7 @@
  *  客户端环境变量初始化
  */
 
-import { IndexHtmlTransformContext, Plugin } from 'vite';
+import type { IndexHtmlTransformContext, Plugin } from 'vite';
 import path from 'path';
 
 let envName = 'dev';
@@ -13,12 +13,12 @@ const transformIndexHtml = (html: string, ctx?: IndexHtmlTransformContext) => {
 
 export default (mode: viteMode): Plugin | null => {
   //main文件的位置
-  const mainPath = path.resolve(__dirname, '../../../', './src/main.ts');
+  const mainPath = path.resolve(__dirname, '../../../', './src/App.tsx');
   switch (mode) {
     case 'dev':
     case 'test':
     case 'pre':
-    case 'ga':
+    case 'prod':
     case 'mock':
       envName = mode;
       break;

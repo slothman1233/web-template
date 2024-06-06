@@ -19,7 +19,7 @@ export default defineConfig(({ command, mode }) => {
 
   const viteEnv = wrapperEnv(env);
 
-  const isProduction = isBuild && (mode === 'mock' || mode === 'ga');
+  const isProduction = isBuild && (mode === 'mock' || mode === 'prod');
 
   const {
     VITE_OUTDIR,
@@ -50,7 +50,7 @@ export default defineConfig(({ command, mode }) => {
         //注入全局less变量
         less: {
           javascriptEnabled: true,
-          additionalData: `@import (reference) "./src/styles/public/common/index.less";`,
+          additionalData: `@import (reference) "./src/styles/public/common/index.less";@import (less) "./src/styles/public/index.less";`,
         },
       },
     },
@@ -70,6 +70,7 @@ export default defineConfig(({ command, mode }) => {
         store: path.resolve('src/store'),
         router: path.resolve('src/router'),
         styles: path.resolve('src/styles'),
+        model: path.resolve('src/model'),
         mock: path.resolve('mock'),
       },
     },

@@ -10,7 +10,7 @@
  * @param {object} compressionOptions 对应的压缩算法的参数   默认 -
  * @param {boolean} deleteOriginFile 压缩后是否删除源文件   默认 -
  */
-import { Plugin } from 'vite';
+import type { Plugin } from 'vite';
 
 import compressPlugin from 'vite-plugin-compression';
 
