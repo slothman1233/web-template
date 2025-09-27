@@ -72,7 +72,7 @@
 
 <style scoped lang="less">
 .el-menu-item {
-  width: 160px;
+  // width: 160px;
   min-width: 160px;
   &:hover {
     background-color: Lighten(@sidbar_bg, 10%);
@@ -85,7 +85,7 @@
 
 .el-sub-menu {
   :deep(.el-menu) {
-    background: rgb(17, 130, 251) !important;
+    background: Lighten(@sidbar_bg, 5%) !important;
   }
 }
 </style>

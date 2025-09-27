@@ -53,7 +53,7 @@ async function login(data: LoginParams): Promise<any> {
 
   //  const userInfoData = await getmenuList(token).catch((e: Error) => console.error(e));
 
-  const userInfoData = userInfoDatas
+  const userInfoData = userInfoDatas;
   //写入缓存
   setUserInfoCache(JSON.stringify(userInfoData));
 
